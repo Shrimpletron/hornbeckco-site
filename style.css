@@ -1,0 +1,201 @@
+/* Hornbeckco — hornbeckco.com
+   Working-paper design system. No frameworks, no external requests. */
+
+:root {
+  --ink: #16263f;
+  --ink-soft: #4a5a70;
+  --accent: #2e7d6b;
+  --accent-ink: #ffffff;
+  --paper: #fafbfc;
+  --paper-tint: #eef2f4;
+  --rule: #c9d2dc;
+  --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
+  --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, Menlo, monospace;
+  --measure: 66ch;
+  --wide: 60rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e8edf3;
+    --ink-soft: #9fb0c4;
+    --accent: #3fa98f;
+    --accent-ink: #0f1722;
+    --paper: #0f1722;
+    --paper-tint: #16202e;
+    --rule: #2a3648;
+  }
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .rise { animation: none !important; opacity: 1 !important; transform: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: oldstyle-nums;
+}
+
+a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+a:hover { text-decoration-thickness: 2px; }
+:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 1px; }
+
+.wrap { max-width: var(--wide); margin: 0 auto; padding: 0 1.25rem; }
+.prose { max-width: var(--measure); }
+
+/* ---------- utility voice: mono labels, stamps, tags ---------- */
+.mono, .eyebrow, .stamp, .tag, .leader, .ledger, .qa th, .qa td:first-child, nav, footer .fine {
+  font-family: var(--mono);
+  font-variant-numeric: tabular-nums lining-nums;
+}
+
+.eyebrow {
+  display: flex; align-items: baseline; gap: 0.75rem;
+  font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-soft); margin: 0 0 1.1rem;
+}
+.eyebrow::after { content: ""; flex: 1; border-bottom: 1px dotted var(--rule); transform: translateY(-0.28em); }
+.eyebrow .stamp { letter-spacing: 0.06em; text-transform: none; }
+
+.tag {
+  display: inline-block; font-size: 0.68rem; letter-spacing: 0.08em;
+  border: 1px solid var(--rule); border-radius: 2px;
+  padding: 0.1rem 0.45rem; color: var(--ink-soft); white-space: nowrap;
+  vertical-align: 0.12em;
+}
+.tag.accent { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- header ---------- */
+header.site {
+  border-bottom: 2px solid var(--ink);
+  padding: 1.1rem 0;
+}
+header.site .wrap { display: flex; align-items: baseline; gap: 1rem; }
+.wordmark {
+  font-family: var(--mono); font-weight: 700; letter-spacing: 0.22em;
+  font-size: 0.95rem; color: var(--ink); text-decoration: none;
+}
+header.site .leader { flex: 1; border-bottom: 1px dotted var(--rule); transform: translateY(-0.3em); }
+header.site .mail { font-family: var(--mono); font-size: 0.8rem; }
+
+/* ---------- hero ---------- */
+.hero { padding: 4.5rem 0 3.5rem; }
+.hero h1 {
+  font-size: clamp(2.1rem, 5.4vw, 3.4rem);
+  line-height: 1.12; letter-spacing: -0.012em; font-weight: 700;
+  margin: 0 0 1.2rem; max-width: 21ch;
+}
+.hero .sub { font-size: 1.2rem; max-width: 46ch; margin: 0 0 2rem; color: var(--ink-soft); }
+.hero .sub strong { color: var(--ink); font-weight: 700; }
+
+.cta-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+.btn {
+  font-family: var(--mono); font-size: 0.82rem; letter-spacing: 0.04em;
+  text-decoration: none; border-radius: 2px; padding: 0.7rem 1.05rem;
+  border: 1.5px solid var(--accent); display: inline-block;
+}
+.btn.primary { background: var(--accent); color: var(--accent-ink); }
+.btn.primary:hover { filter: brightness(1.06); }
+.btn.ghost { color: var(--accent); background: transparent; }
+.btn.ghost:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+
+.rise { opacity: 0; transform: translateY(10px); animation: rise 0.55s ease-out forwards; }
+.rise.d1 { animation-delay: 0.08s; } .rise.d2 { animation-delay: 0.18s; } .rise.d3 { animation-delay: 0.3s; }
+@keyframes rise { to { opacity: 1; transform: none; } }
+
+/* ---------- specimen excerpt ---------- */
+.excerpt {
+  border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+  background: var(--paper-tint); border-radius: 2px;
+  padding: 1.4rem 1.5rem; margin-top: 3rem;
+}
+.excerpt .figs { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.fig .num { font-family: var(--mono); font-size: 1.7rem; font-weight: 700; letter-spacing: -0.01em; }
+.fig .what { font-size: 0.95rem; color: var(--ink-soft); margin-top: 0.2rem; }
+.excerpt .fine { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-soft); margin: 1.2rem 0 0; }
+
+/* ---------- sections ---------- */
+section { padding: 3.4rem 0; border-top: 1px solid var(--rule); }
+section h2 { font-size: 1.65rem; line-height: 1.2; margin: 0 0 1rem; letter-spacing: -0.008em; }
+section h3 { font-size: 1.08rem; margin: 1.6rem 0 0.4rem; }
+section.tint { background: var(--paper-tint); }
+
+/* deliverable list */
+.deliv { list-style: none; padding: 0; margin: 1.4rem 0 0; max-width: var(--measure); }
+.deliv li { padding: 0.65rem 0; border-bottom: 1px dotted var(--rule); }
+.deliv li:last-child { border-bottom: 0; }
+.deliv .what { font-weight: 700; }
+.deliv .why { color: var(--ink-soft); }
+
+/* process — a real sequence, so numbered */
+.steps { list-style: none; counter-reset: step; padding: 0; margin: 1.4rem 0 0; max-width: var(--measure); }
+.steps li { counter-increment: step; display: grid; grid-template-columns: 2.6rem 1fr; gap: 0 0.9rem; padding: 0.9rem 0; border-bottom: 1px dotted var(--rule); }
+.steps li:last-child { border-bottom: 0; }
+.steps li::before {
+  content: counter(step, decimal-leading-zero);
+  font-family: var(--mono); font-size: 0.8rem; color: var(--accent);
+  padding-top: 0.35rem;
+}
+.steps .what { font-weight: 700; }
+.steps .why { grid-column: 2; color: var(--ink-soft); font-size: 0.98rem; }
+
+/* ---------- fee ledger ---------- */
+.ledger { width: 100%; border-collapse: collapse; margin-top: 1.6rem; font-size: 0.86rem; }
+.ledger caption { text-align: left; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); padding-bottom: 0.6rem; }
+.ledger th { text-align: left; font-weight: 700; border-bottom: 2px solid var(--ink); padding: 0.45rem 0.7rem 0.45rem 0; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
+.ledger td { border-bottom: 1px dotted var(--rule); padding: 0.75rem 0.7rem 0.75rem 0; vertical-align: top; }
+.ledger .tier { font-weight: 700; white-space: nowrap; }
+.ledger .scope { font-family: var(--serif); font-size: 1rem; max-width: 34ch; }
+.ledger .fee { font-weight: 700; white-space: nowrap; }
+.ledger tr:last-child td { border-bottom: 2px solid var(--ink); }
+.after-ledger { color: var(--ink-soft); font-size: 0.98rem; max-width: var(--measure); }
+
+/* ---------- data-handling Q&A ---------- */
+.qa { width: 100%; border-collapse: collapse; margin-top: 1.4rem; }
+.qa th { text-align: left; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; border-bottom: 2px solid var(--ink); padding: 0.45rem 0.9rem 0.45rem 0; }
+.qa td { border-bottom: 1px dotted var(--rule); padding: 0.7rem 0.9rem 0.7rem 0; vertical-align: top; }
+.qa td:first-child { font-size: 0.82rem; color: var(--ink-soft); width: 38%; }
+.qa td:last-child { font-size: 1rem; }
+
+/* ---------- pilots ---------- */
+.pilot-card {
+  border: 1px solid var(--rule); border-radius: 2px; background: var(--paper);
+  padding: 1.4rem 1.5rem; max-width: var(--measure); margin-top: 1.4rem;
+}
+.pilot-card .price { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; }
+
+/* ---------- sign-off footer ---------- */
+.signoff { padding: 4rem 0; border-top: 2px solid var(--ink); }
+.signoff h2 { font-size: 1.9rem; max-width: 24ch; margin: 0 0 2.2rem; }
+.sig-block { max-width: 30rem; }
+.sig-line { border-bottom: 1px solid var(--ink); height: 2.4rem; position: relative; }
+.sig-line .filled {
+  position: absolute; bottom: 0.35rem; left: 0;
+  font-family: var(--mono); font-size: 1rem;
+}
+.sig-caption { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.4rem; }
+
+footer.site { border-top: 1px solid var(--rule); padding: 1.6rem 0 2.4rem; }
+footer.site .fine { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.7; }
+
+@media (max-width: 40rem) {
+  .hero { padding: 3rem 0 2.6rem; }
+  .ledger .scope { font-size: 0.95rem; }
+  .qa td:first-child { width: 44%; }
+  header.site .mail { display: none; }
+}
+
+@media print {
+  .cta-row, .btn { display: none !important; }
+  body { background: #fff; color: #000; }
+}
