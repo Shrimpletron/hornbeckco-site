@@ -87,6 +87,10 @@ header.site .wrap { display: flex; align-items: baseline; gap: 1rem; }
   font-family: var(--mono); font-weight: 700; letter-spacing: 0.22em;
   font-size: 0.95rem; color: var(--ink); text-decoration: none;
 }
+.wordmark .mark {
+  display: inline-block; width: 0.62em; height: 0.62em;
+  background: var(--accent); margin-right: 0.55em;
+}
 header.site .leader { flex: 1; border-bottom: 1px dotted var(--rule); transform: translateY(-0.3em); }
 header.site .mail { font-family: var(--mono); font-size: 0.8rem; }
 
