@@ -2,29 +2,18 @@
    Working-paper design system. No frameworks, no external requests. */
 
 :root {
-  --ink: #16263f;
-  --ink-soft: #4a5a70;
-  --accent: #2e7d6b;
-  --accent-ink: #ffffff;
-  --paper: #fafbfc;
-  --paper-tint: #eef2f4;
-  --rule: #c9d2dc;
+  --ink: #e9edf3;
+  --ink-soft: #9dabbe;
+  --accent: #f0891d;
+  --accent-ink: #131c29;
+  --paper: #131c29;
+  --paper-tint: #1a2432;
+  --rule: #2c3849;
+  --sq: #3e4a5c;
   --serif: Charter, "Bitstream Charter", "Sitka Text", Cambria, Georgia, serif;
   --mono: ui-monospace, "SF Mono", "Cascadia Code", Consolas, Menlo, monospace;
   --measure: 66ch;
   --wide: 60rem;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ink: #e8edf3;
-    --ink-soft: #9fb0c4;
-    --accent: #3fa98f;
-    --accent-ink: #0f1722;
-    --paper: #0f1722;
-    --paper-tint: #16202e;
-    --rule: #2a3648;
-  }
 }
 
 * { box-sizing: border-box; }
@@ -74,6 +63,19 @@ a:hover { text-decoration-thickness: 2px; }
   vertical-align: 0.12em;
 }
 .tag.accent { border-color: var(--accent); color: var(--accent); }
+
+/* ---------- signature square strip ---------- */
+.sq-strip {
+  height: 10px; width: 330px; max-width: 100%;
+  margin: 0 0 1.5rem;
+  background-image:
+    linear-gradient(var(--accent), var(--accent)),
+    repeating-linear-gradient(90deg, var(--sq) 0 10px, transparent 10px 16px);
+  background-repeat: no-repeat, repeat;
+  background-size: 10px 10px, auto;
+  background-position: 272px 0, 0 0;
+}
+footer.site .sq-strip { margin: 0 0 1.2rem; }
 
 /* ---------- header ---------- */
 header.site {
@@ -191,6 +193,8 @@ footer.site .fine { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.7
 @media (max-width: 40rem) {
   .hero { padding: 3rem 0 2.6rem; }
   .ledger .scope { font-size: 0.95rem; }
+  .ledger th, .ledger td { padding-right: 0.4rem; }
+  .ledger { font-size: 0.8rem; }
   .qa td:first-child { width: 44%; }
   header.site .mail { display: none; }
 }
