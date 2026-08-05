@@ -112,8 +112,15 @@ header.site .mail { font-family: var(--mono); font-size: 0.8rem; }
 }
 .btn.primary { background: var(--accent); color: var(--accent-ink); }
 .btn.primary:hover { filter: brightness(1.06); }
-.btn.ghost { color: var(--accent); background: transparent; }
-.btn.ghost:hover { background: color-mix(in srgb, var(--accent) 10%, transparent); }
+.btn.ghost { border-color: var(--sq); color: var(--ink); background: transparent; }
+.btn.ghost:hover { border-color: var(--accent); color: var(--accent); background: transparent; }
+
+.fee-strip {
+  font-family: var(--mono); font-size: 0.78rem; letter-spacing: 0.04em;
+  color: var(--ink-soft); border-block: 1px dotted var(--rule);
+  padding: 0.6rem 0; margin: 1.7rem 0 0;
+}
+.fee-strip strong { color: var(--ink); font-weight: 700; }
 
 .rise { opacity: 0; transform: translateY(10px); animation: rise 0.55s ease-out forwards; }
 .rise.d1 { animation-delay: 0.08s; } .rise.d2 { animation-delay: 0.18s; } .rise.d3 { animation-delay: 0.3s; }
@@ -121,14 +128,18 @@ header.site .mail { font-family: var(--mono); font-size: 0.8rem; }
 
 /* ---------- specimen excerpt ---------- */
 .excerpt {
-  border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+  border: 1px solid var(--rule); border-left: 3px solid var(--sq);
   background: var(--paper-tint); border-radius: 2px;
   padding: 1.4rem 1.5rem; margin-top: 3rem;
 }
-.excerpt .figs { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
-.fig .num { font-family: var(--mono); font-size: 1.7rem; font-weight: 700; letter-spacing: -0.01em; }
+.excerpt .figs { display: grid; gap: 1.1rem; grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr)); }
+.fig .num { font-family: var(--mono); font-size: clamp(1.4rem, 0.9rem + 1.1vw, 1.7rem); font-weight: 700; letter-spacing: -0.02em; }
+.fig .num::before {
+  content: ""; display: inline-block; width: 0.42em; height: 0.42em;
+  background: var(--accent); margin-right: 0.5em; vertical-align: 0.08em;
+}
 .fig .what { font-size: 0.95rem; color: var(--ink-soft); margin-top: 0.2rem; }
-.excerpt .fine { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-soft); margin: 1.2rem 0 0; }
+.excerpt .fine { font-family: var(--mono); font-size: 0.72rem; color: var(--ink-soft); margin: 1.2rem 0 0; max-width: 78ch; }
 
 /* ---------- sections ---------- */
 section { padding: 3.4rem 0; border-top: 1px solid var(--rule); }
@@ -141,7 +152,7 @@ section.tint { background: var(--paper-tint); }
 .deliv li { padding: 0.65rem 0; border-bottom: 1px dotted var(--rule); }
 .deliv li:last-child { border-bottom: 0; }
 .deliv .what { font-weight: 700; }
-.deliv .why { color: var(--ink-soft); }
+.deliv .why { color: var(--ink-soft); font-size: 1rem; }
 
 /* process — a real sequence, so numbered */
 .steps { list-style: none; counter-reset: step; padding: 0; margin: 1.4rem 0 0; max-width: var(--measure); }
@@ -153,21 +164,22 @@ section.tint { background: var(--paper-tint); }
   padding-top: 0.35rem;
 }
 .steps .what { font-weight: 700; }
-.steps .why { grid-column: 2; color: var(--ink-soft); font-size: 0.98rem; }
+.steps .why { grid-column: 2; color: var(--ink-soft); font-size: 1rem; }
 
 /* tables scroll inside their own container on narrow screens */
 .tbl-scroll { overflow-x: auto; }
 
 /* ---------- fee ledger ---------- */
-.ledger { width: 100%; border-collapse: collapse; margin-top: 1.6rem; font-size: 0.86rem; }
+.ledger { width: 100%; border-collapse: collapse; margin-top: 1.4rem; font-size: 0.86rem; }
 .ledger caption { text-align: left; font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--ink-soft); padding-bottom: 0.6rem; }
 .ledger th { text-align: left; font-weight: 700; border-bottom: 2px solid var(--ink); padding: 0.45rem 0.7rem 0.45rem 0; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; }
 .ledger td { border-bottom: 1px dotted var(--rule); padding: 0.75rem 0.7rem 0.75rem 0; vertical-align: top; }
 .ledger .tier { font-weight: 700; white-space: nowrap; }
 .ledger .scope { font-family: var(--serif); font-size: 1rem; max-width: 34ch; }
-.ledger .fee { font-weight: 700; white-space: nowrap; }
+.ledger .fee { font-weight: 700; white-space: nowrap; text-align: right; font-size: 1rem; }
+.ledger th:nth-child(3) { text-align: right; }
 .ledger tr:last-child td { border-bottom: 2px solid var(--ink); }
-.after-ledger { color: var(--ink-soft); font-size: 0.98rem; max-width: var(--measure); }
+.after-ledger { color: var(--ink-soft); font-size: 1rem; max-width: var(--measure); }
 
 /* ---------- data-handling Q&A ---------- */
 .qa { width: 100%; border-collapse: collapse; margin-top: 1.4rem; }
@@ -181,7 +193,7 @@ section.tint { background: var(--paper-tint); }
   border: 1px solid var(--rule); border-radius: 2px; background: var(--paper);
   padding: 1.4rem 1.5rem; max-width: var(--measure); margin-top: 1.4rem;
 }
-.pilot-card .price { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; }
+.pilot-card .price { font-family: var(--mono); font-size: 1.5rem; font-weight: 700; margin: 0 0 0.6rem; }
 
 /* ---------- sign-off footer ---------- */
 .signoff { padding-block: 4rem; border-top: 2px solid var(--ink); }
@@ -192,13 +204,19 @@ section.tint { background: var(--paper-tint); }
   position: absolute; bottom: 0.35rem; left: 0;
   font-family: var(--mono); font-size: 1rem;
 }
+.sig-line a.filled { text-decoration: none; font-weight: 700; font-size: 1.05rem; }
+.sig-line a.filled:hover { text-decoration: underline; text-decoration-thickness: 1px; }
 .sig-caption { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.4rem; }
 
 footer.site { border-top: 1px solid var(--rule); padding: 1.6rem 0 2.4rem; }
-footer.site .fine { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.7; }
+footer.site .fine { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.7; max-width: 90ch; }
+
+.hero h1, section h2, .signoff h2 { text-wrap: balance; }
+::selection { background: var(--accent); color: var(--accent-ink); }
 
 @media (max-width: 40rem) {
   .hero { padding-block: 3rem 2.6rem; }
+  header.site .leader { display: none; }
   .ledger .scope { font-size: 0.95rem; }
   .ledger th, .ledger td { padding-right: 0.4rem; }
   .ledger { font-size: 0.8rem; }
@@ -209,4 +227,7 @@ footer.site .fine { font-size: 0.72rem; color: var(--ink-soft); line-height: 1.7
 @media print {
   .cta-row, .btn { display: none !important; }
   body { background: #fff; color: #000; }
+  a { color: #000; }
+  main a[href$=".pdf"]::after { content: " (hornbeckco.com" attr(href) ")"; font-size: 0.85em; }
+  .excerpt { border-color: #999; }
 }
