@@ -208,6 +208,12 @@ section.tint { background: var(--paper-tint); }
 .sig-line a.filled:hover { text-decoration: underline; text-decoration-thickness: 1px; }
 .sig-caption { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-top: 0.4rem; }
 .contact-note { color: var(--ink-soft); font-size: 0.9rem; max-width: 52ch; margin-top: 1.6rem; }
+.paused-note {
+  font-family: var(--mono); font-size: 0.8rem; letter-spacing: 0.02em;
+  color: var(--ink); background: var(--paper-tint);
+  border: 1px solid var(--rule); border-left: 3px solid var(--accent);
+  border-radius: 2px; padding: 0.7rem 0.9rem; margin: 1.4rem 0 0; max-width: 56ch;
+}
 .legal-page h1 { font-size: clamp(1.7rem, 4vw, 2.3rem); margin: 0 0 1.2rem; }
 .legal-page h2 { font-size: 1.15rem; margin: 1.8rem 0 0.4rem; }
 .legal-page .prose + .prose { margin-top: 0.8rem; }
